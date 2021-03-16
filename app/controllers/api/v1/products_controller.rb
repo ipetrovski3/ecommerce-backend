@@ -37,7 +37,7 @@ module Api
       end
 
       def find_product
-        @product = Product.find(params[:id])
+        @product = Product.friendly.find(params[:id])
       end
     end
   end
