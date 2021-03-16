@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :categories
       resources :products
-      resources :sessions, only: %i[create destroy]
+    end
+  end
+
+  scope :api do
+    scope :v1 do
+      devise_for :admins, defaults: { format: :json }
     end
   end
 end
