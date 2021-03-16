@@ -1,29 +1,23 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Seed the database with the neccessary data to work with in development
 
 2.times do
   Category.create(
-    name: 'CategoryTest'
+    name: Faker::Commerce.material
   )
 end
 
 10.times do
   Product.create(
-    name: 'product1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra',
-    price: 3.99,
+    name: Faker::Commerce.product_name,
+    description: Faker::Lorem.sentence(word_count: 6),
+    price: rand(1.2...76.9),
     category_id: 1
   )
 end
 
 5.times do
   Order.create(
-    product_id: 1,
+    product_id: rand(1..10),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     address: Faker::Address.street_name,
@@ -34,4 +28,16 @@ end
   )
 end
 
-puts "Database seeded with Categories: #{Category.count}, Products: #{Product.count}, Orders: #{Order.count}"
+Admin.create(
+  email: 'email@email.com',
+  password: '123123123',
+  password_confirmation: '123123123'
+)
+
+Admin.create(
+  email: 'some@email.com',
+  password: '123123123',
+  password_confirmation: '123123123'
+)
+
+puts "Database seeded with Categories: #{Category.count}, Products: #{Product.count}, Orders: #{Order.count}, Admins: #{Admin.count}"
