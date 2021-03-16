@@ -17,6 +17,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 # Use Devise for authentication
 gem 'devise'
+# Token autentication
+gem 'simple_token_authentication', '~> 1.0'
 
 gem 'carrierwave', '~> 2.0'
 # Use Active Storage variant
