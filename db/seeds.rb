@@ -20,3 +20,18 @@ end
     category_id: 1
   )
 end
+
+5.times do
+  Order.create(
+    product_id: 1,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    address: Faker::Address.street_name,
+    town: Faker::Address.street_address,
+    phone: Faker::PhoneNumber.cell_phone,
+    qty: rand(3),
+    note: Faker::Lorem.sentence(word_count: 5, supplemental: true, random_words_to_add: 6)
+  )
+end
+
+puts "Database seeded with Categories: #{Category.count}, Products: #{Product.count}, Orders: #{Order.count}"

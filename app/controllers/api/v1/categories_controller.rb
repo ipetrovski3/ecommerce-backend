@@ -25,14 +25,19 @@ module Api
         end
       end
 
+      def destroy
+        @category.delete
+        head :no_content, status: 200
+      end
+
       private
 
       def category_params
-        params.permit(:name, :image)
+        params.require(:category).permit(:name, :image)
       end
 
       def set_category
-        @category = Category.find(params[:id])
+        @category = Category.friendly.find(params[:id])
       end
     end
   end
