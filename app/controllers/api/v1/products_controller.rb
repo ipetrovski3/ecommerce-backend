@@ -1,6 +1,7 @@
 module Api
   module V1
     class ProductsController < ApplicationController
+      before_action :authorized, only: %i[create update destroy]
       before_action :find_product, only: %i[update destroy]
       def index
         @products = Product.all
