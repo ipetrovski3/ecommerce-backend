@@ -5,8 +5,10 @@ module Api
 
       def create
         @admin = Admin.create(admin_params)
+        exp = Time.now.to_i + 1.day
+
         if @admin.valid?
-          token = encode_token({ admin_id: @admin.id })
+          token = encode_token({ admin_id: @admin.id, exp: exp })
           render json: { admin: @admin, token: token }
         else
           render json: { error: 'Invalid Username or Password' }
@@ -15,10 +17,11 @@ module Api
 
       def login
         @admin = Admin.find_by(username: params[:username])
+        exp = Time.now.to_i + 12.hours
 
         if @admin && @admin.authenticate(params[:password])
-          encode_token({ admin_id: @admin.id })
-          render json: { message: 'Succesfully loged in' }
+          token = encode_token({ admin_id: @admin.id, exp: exp })
+          render json: { message: 'Succesfully loged in', token: token }
         else
           render json: { error: 'Invalid Username or Password' }
         end
