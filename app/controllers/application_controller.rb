@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  before_action :set_default_response_format
+
   def encode_token(payload)
     JWT.encode(payload, 'ourSecret')
   end
@@ -31,5 +33,11 @@ class ApplicationController < ActionController::API
 
   def authorized
     render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+  end
+
+  private
+
+  def set_default_response_format
+    request.format = :json
   end
 end
