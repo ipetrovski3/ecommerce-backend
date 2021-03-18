@@ -1,6 +1,7 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
+      before_action :authorized, only: %i[create update destroy]
       before_action :set_category, only: %i[show update]
       def index
         @categories = Category.all
