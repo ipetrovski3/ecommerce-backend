@@ -28,16 +28,4 @@ end
   )
 end
 
-Admin.create(
-  email: 'email@email.com',
-  password: '123123123',
-  password_confirmation: '123123123'
-)
-
-Admin.create(
-  email: 'some@email.com',
-  password: '123123123',
-  password_confirmation: '123123123'
-)
-
-puts "Database seeded with Categories: #{Category.count}, Products: #{Product.count}, Orders: #{Order.count}, Admins: #{Admin.count}"
+puts "Database seeded with Categories: #{Category.count}, Products: #{Product.count}, Orders: #{Order.count}"

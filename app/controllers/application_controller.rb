@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::API
-  # Uncomment below line when ready to sign_in as an Admin and change stuff
-  # before_action :authenticate_admin!
   def encode_token(payload)
     JWT.encode(payload, 'ourSecret')
   end
@@ -11,7 +9,7 @@ class ApplicationController < ActionController::API
 
   def decoded_token
     if auth_header
-      token = auth_header.split(' ')[1]
+      token = auth_header.split(' ').first
       begin
         JWT.decode(token, 'ourSecret', true, algorithm: 'HS256')
       rescue JWT::DecodeError

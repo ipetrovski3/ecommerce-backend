@@ -31,7 +31,7 @@ module Api
       private
 
       def admin_params
-        params.permit(:username, :password)
+        params.require(:admin).permit(:username, :password)
       end
     end
   end
