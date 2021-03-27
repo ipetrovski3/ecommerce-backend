@@ -2,6 +2,8 @@ module Api
   module V1
     class OrdersController < ApplicationController
       before_action :set_order, only: %i[show update destroy]
+      before_action :authorized
+      
       def index
         @orders = Order.all
       end
@@ -16,7 +18,9 @@ module Api
         end
       end
 
-      def show; end
+      def show
+        render json: @order
+      end
 
       def update
         if @order.save(order_params)
