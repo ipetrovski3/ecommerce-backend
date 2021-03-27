@@ -2,7 +2,7 @@ module Api
   module V1
     class ProductsController < ApplicationController
       before_action :authorized, only: %i[create update destroy]
-      before_action :find_product, only: %i[update destroy]
+      before_action :find_product, only: %i[show update destroy]
       def index
         @products = Product.all
         render :index
@@ -16,6 +16,10 @@ module Api
         else
           render json: @product.errors, status: :unprocessable_entity
         end
+      end
+
+      def show
+        render json: @product
       end
 
       def update
